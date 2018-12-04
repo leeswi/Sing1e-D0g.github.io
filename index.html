@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,7 +96,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -364,36 +364,11 @@
         
           
             <p>Github Pages建立博客比较方便，而且有github的支持，不用管服务器什么之类的问题。下面主要就建立博客以及配置Hexo主题，用atom进行markdown编辑并发布到github.io进行介绍。</p>
-<h1>0x01 Github Pages建立博客</h1><br><h4>第一步：建立github账户</h4><br><h4>第二步：在github上建立仓库（Repositories）</h4><br><br>建立仓库命名需要是 github用户名.github.io<br><br><h4>第三步：简单设置</h4><br>进入仓库，点击setting，可以看到项目的具体内容，也可以选择jekyll风格的主题，此时可以访问自己的博客了，地址就是：username.github.io<br><br><h1>0x02 Hexo主题美化自己的博客</h1>
-
-<h4>第一步：环境配置</h4><br>安装git，git的官方网址：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a><br><br>安装node.js，官方网址为：<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br><br>测试是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git –version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><br><br><h4>第二步：安装Hexo</h4>
-
-<p>个人感觉Hexo比jekyll好用一点，而且据说里面的NexT主题比较强大，自定义比较丰富（还未探索）</p>
-<p>在命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
-<p>简单测试一下Hexo的用法：</p>
-<ul>
-<li>首先本地建立一个文件夹作为博客的主目录，比如叫myblog</li>
-<li>初始化该目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init 目录路径</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果在目录下进行cmd，直接hexo init就可以了</p>
-<ul>
-<li>初始化之后就可以看到里面的一下配置文件了（跟jeklly差不多）,<strong>config.yml是配置文件，</strong>posts是存储博客文章的文件夹</li>
-<li>本地服务器测试：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>看到Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>. Press Ctrl+C to stop.基本上就可以了，可以点击链接看一下自己博客的初始样子</p>
-<h4>第三步：更换主题</h4><br>Hexo里面用NexT主题比较多，，使用这个主题首先要从git上下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd your-hexo-site</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure><br><br>这个主题保存在博客文件夹里面theme文件夹里，然后打开_config.yml站点配置文件，找到theme字段改为next就可以了。<br><br>具体配置请参考这篇文章：<a href="https://blog.csdn.net/amberwu/article/details/79397909" target="_blank" rel="noopener">https://blog.csdn.net/amberwu/article/details/79397909</a><br><br><h4>第四步：提交到github pages</h4>
-
-<p>自己在__posts文件夹写好了文章或是更改了配置文件需要push到github，首先要对站点配置文件进行设置，以便连接到自己的github仓库。<br>在_config.yml最下面找到deploy字段，配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/username/username.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<p>首次部署要在命令行输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></table></figure></p>
-<p>生成静态界面并提交到仓库：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure></p>
-<p>出现INFO Deploy done: git 表示上传成功</p>
-<h1>0x03 Atom编辑器快速发布博客</h1>
+<h2>0x01 Github Pages建立博客</h2><br><h4>第一步：建立github账户</h4><br><h4>第二步：在github上建立仓库（Repositories）</h4><br>建立仓库命名需要是 github用户名.github.io<br><h4>第三步：简单设置</h4><br>进入仓库，点击setting，可以看到项目的具体内容，也可以选择jekyll风格的主题，此时可以访问自己的博客了，地址就是：username.github.io<br><h2>0x02 Hexo主题美化自己的博客</h2><br><h4>第一步：环境配置</h4><br>安装git，git的官方网址：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a><br><br>安装node.js，官方网址为：<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br><br>测试是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><span class="line">2</span><span class="line">3</span></pre></td><td class="code"><pre><span class="line">git –version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><br><br><h4>第二步：安装Hexo</h4><br><br>个人感觉Hexo比jekyll好用一点，而且据说里面的NexT主题比较强大，自定义比较丰富（还未探索）<br><br>在命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure><br><br>简单测试一下Hexo的用法：<br><br>- 首先本地建立一个文件夹作为博客的主目录，比如叫myblog<br>- 初始化该目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo init 目录路径</span><br></pre></td></tr></table></figure><br><br>如果在目录下进行cmd，直接hexo init就可以了<br>- 初始化之后就可以看到里面的一下配置文件了（跟jeklly差不多）,<strong>config.yml是配置文件，</strong>posts是存储博客文章的文件夹<br>- 本地服务器测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure><br><br>看到Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>. Press Ctrl+C to stop.基本上就可以了，可以点击链接看一下自己博客的初始样子<br><br><h4>第三步：更换主题</h4><br>Hexo里面用NexT主题比较多，，使用这个主题首先要从git上下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cd your-hexo-site</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure><br><br>这个主题保存在博客文件夹里面theme文件夹里，然后打开_config.yml站点配置文件，找到theme字段改为next就可以了。<br><br>具体配置请参考这篇文章：<a href="https://blog.csdn.net/amberwu/article/details/79397909" target="_blank" rel="noopener">https://blog.csdn.net/amberwu/article/details/79397909</a><br><br><h4>第四步：提交到github pages</h4><br><br>自己在__posts文件夹写好了文章或是更改了配置文件需要push到github，首先要对站点配置文件进行设置，以便连接到自己的github仓库。<br>在_config.yml最下面找到deploy字段，配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><span class="line">2</span><span class="line">3</span><span class="line">4</span></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/username/username.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><br><br>首次部署要在命令行输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></table></figure><br><br>生成静态界面并提交到仓库：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure><br><br>出现INFO Deploy done: git 表示上传成功<br><br><h2>0x03 Atom编辑器快速发布博客</h2>
 
 <p>Atom编辑器是github开发的，插件很丰富，界面比较友好（高分屏用起来也比较舒服），最重要的是免费开源，因为博客基本上md格式，下面链接介绍了如何将Atom打造成markdown编辑神器。</p>
 <p><a href="https://www.cnblogs.com/libin-1/p/6638165.html" target="_blank" rel="noopener">https://www.cnblogs.com/libin-1/p/6638165.html</a></p>
-<p>那么怎么在连接自己的github项目呢。</p>
+<p>那么怎么连接自己的github项目呢。</p>
 <ul>
 <li>首先点击文件–&gt;添加项目文件夹–&gt;选择自己的博客文件夹</li>
 <li>atom里安装命令行插件plateformio-ide-terminal</li>
@@ -791,7 +766,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -838,6 +813,8 @@
   
 
 
+  
+
 
 
 
@@ -876,6 +853,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
