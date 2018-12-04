@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[使用GitHub Pages + Hexo + atom建立自己的博客]]></title>
+    <url>%2F2018%2F12%2F03%2F2018-12-2-%E4%BD%BF%E7%94%A8GitHub%20Pages%20%2B%20hexo%20%2B%20atom%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[Github Pages建立博客比较方便，而且有github的支持，不用管服务器什么之类的问题。下面主要就建立博客以及配置Hexo主题，用atom进行markdown编辑并发布到github.io进行介绍。 0x01 Github Pages建立博客第一步：建立github账户第二步：在github上建立仓库（Repositories）建立仓库命名需要是 github用户名.github.io 第三步：简单设置进入仓库，点击setting，可以看到项目的具体内容，也可以选择jekyll风格的主题，此时可以访问自己的博客了，地址就是：username.github.io 0x02 Hexo主题美化自己的博客第一步：环境配置安装git，git的官方网址：https://git-scm.com/downloads 安装node.js，官方网址为：http://nodejs.cn/download/ 测试是否成功：123git –versionnode -vnpm -v 第二步：安装Hexo个人感觉Hexo比jekyll好用一点，而且据说里面的NexT主题比较强大，自定义比较丰富（还未探索） 在命令行输入1npm install hexo-cli -g 简单测试一下Hexo的用法： 首先本地建立一个文件夹作为博客的主目录，比如叫myblog 初始化该目录：hexo init 目录路径，如果在目录下进行cmd，直接hexo init就可以了 初始化之后就可以看到里面的一下配置文件了（跟jeklly差不多）,config.yml是配置文件，posts是存储博客文章的文件夹 本地服务器测试：hexo server 看到Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.基本上就可以了，可以点击链接看一下自己博客的初始样子 第三步：更换主题Hexo里面用NexT主题比较多，，使用这个主题首先要从git上下载12cd your-hexo-sitegit clone https://github.com/iissnan/hexo-theme-next themes/next 这个主题保存在博客文件夹里面theme文件夹里，然后打开_config.yml站点配置文件，找到theme字段改为next就可以了。 具体配置请参考这篇文章：https://blog.csdn.net/amberwu/article/details/79397909 更多关于next美化的请参考这篇：https://blog.csdn.net/u011475210/article/details/79023429 第四步：提交到github pages自己在__posts文件夹写好了文章或是更改了配置文件需要push到github，首先要对站点配置文件进行设置，以便连接到自己的github仓库。在_config.yml最下面找到deploy字段，配置如下：1234deploy: type: git repo: https://github.com/username/username.github.io branch: master 首次部署要在命令行输入：1npm install hexo-deployer-git –save 生成静态界面并提交到仓库：1hexo d -g 出现INFO Deploy done: git 表示上传成功 0x03 Atom编辑器快速发布博客Atom编辑器是github开发的，插件很丰富，界面比较友好（高分屏用起来也比较舒服），最重要的是免费开源，因为博客基本上md格式，下面链接介绍了如何将Atom打造成markdown编辑神器。 https://www.cnblogs.com/libin-1/p/6638165.html 那么怎么连接自己的github项目呢。 首先点击文件–&gt;添加项目文件夹–&gt;选择自己的博客文件夹 atom里安装命令行插件plateformio-ide-terminal 安装markdown-preview-plus等等一系列辅助md编辑插件 结合命令行插件进行md提交，整个过程不需要配置里面的github面板或者git-plus什么之类的插件，这些配置是在站点配置文件搞好的 这里说明一下，可能由于markdown-preview-plus最新版本和同步滚动插件(markdown-scroll-sync)不兼容，所以可能会报错。报错的话可以安装低版本的markdown-preview-plus，这个低版本在install里好像找不到，可以通过命令行安装apm install markdown-preview-plus@2.4.16]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+</search>
