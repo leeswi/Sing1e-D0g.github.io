@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2018Xuca-Warmup之php文件包含问题]]></title>
+    <url>%2F2018%2F12%2F06%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8820181204%EF%BC%89%EF%BC%9A2018Xuca-Warmup%E4%B9%8Bphp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[2018Xuca一道web热身题，考点是文件包含，比较简单。下面是源码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;?php class emmm &#123; public static function checkFile(&amp;$page) &#123; $whitelist = ["source"=&gt;"source.php","hint"=&gt;"hint.php","index"=&gt;"index.php"]; if (! isset($page) || !is_string($page)) &#123; echo "you can't see it1"; return false; &#125; if (in_array($page, $whitelist)) &#123; //echo 'pass1'; return true; //情况一：输入的参数在给定的白名单里面，可以包含成功 &#125; $_page = mb_substr( //截取字符串 $page, 0, mb_strpos($page . '?', '?') ); //echo '&lt;br&gt;'.$_page.'&lt;br&gt;'; if (in_array($_page, $whitelist)) &#123; echo 'pass2'; return true; &#125; $_page = urldecode($page); $_page = mb_substr( $_page, 0, mb_strpos($_page . '?', '?') ); if (in_array($_page, $whitelist)) &#123; return true; &#125; echo "you can't see it"; return false; &#125; &#125; if (! empty($_REQUEST['file']) //存在file参数 &amp;&amp; is_string($_REQUEST['file']) //是字符串 &amp;&amp; emmm::checkFile($_REQUEST['file']) //调用类方法检查 ) &#123; include $_REQUEST['file']; exit; &#125; else &#123; echo "&lt;br&gt;&lt;img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" /&gt;"; &#125;?&gt;分析主要是调用类方法对输入的参数进行检查，类方法判断了基本上是三种情况，满足其中一种返回为true都可以调用包含。情况1是输入的参数在白名单里，直接包含。情况2是多了个截取字符串，在输入内容后面加了问号，然后又截取问号前面的字符串（没想明白这样做有啥意义）这就给我们操作留了后门。我们可以这样构造12file=source.php?../../../../../../../etc/passwdfile=hint.php?../../../../../../..//etc/passwd斜杠分割的是一个目录，这里source.php?..整个会被认为是一个文件，但是在目录里这个文件并不存在，因此会继续触发后面的导致目录穿越所以类似这样的payload也是可以的：1file=%20source.php?dasdasdasd/../../../../../../etc/passwd涉及到的漏洞是：phpmyadmin4.8.1远程文件包含漏洞(CVE-2018-12613)情况3是对得到的参数解码（第二步截取后的），然后再截取。整体的思路就是第一段不出现?，第二段又要出现?。所以进行二次urlencode编码， %253f 浏览器会自动解码一次变成%3f，再经过代码的urldecode()变成?。接下来就是文件包含了。这里的文件包含和题目部署环境有关，Windows由于目录命名规则不能带?。所以只能使用这个方式。]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
+        <tag>文件包含</tag>
+        <tag>Xuca</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[学习笔记（20181014）：模板注入（SSTI）]]></title>
     <url>%2F2018%2F12%2F05%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8820181014%EF%BC%89%EF%BC%9A%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%EF%BC%88SSTI%EF%BC%89%2F</url>
     <content type="text"><![CDATA[模板注入模板引擎（这里特指用于Web开发的模板引擎）是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。静态模板文件会在运行时将变量/占位符替换为HTML页面中的实际值。当前流行且使用广泛的模板引擎有Smarty，Twig，Jinja2，FreeMarker，Velocity。服务器端模板注入（SSTI）漏洞将允许攻击者将注入模板指令作为用户输入，从而导致XSS或任意代码的执行（RCE)。利用方法：找到模板注入并识别模板引擎后的第一步是阅读文档。不应低估这一步骤的重要性; 其中一个日常利用的东西纯粹来自好学的文档细读。主要关注领域是：‘对于模板作者’部分涵盖基本语法。“安全注意事项” - 开发您正在测试的应用程序的人无法阅读此内容，并且可能包含一些有用的提示。内置方法，函数，过滤器和变量的列表。扩展/插件列表 - 默认情况下可以启用某些列表。参考文章：http://www.freebuf.com/vuls/83999.html实战剖析：https://www.codercto.com/a/Y3RvNjQwNWN0bw==.html探索Flask/Jinja2中的服务端模版注入 http://www.freebuf.com/articles/web/98619.html]]></content>
